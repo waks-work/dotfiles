@@ -1,0 +1,209 @@
+/* === Minimal Floating Cinematic Waybar === */
+@import url("/home/waks_work/.cache/wal/colors-waybar.css");
+
+/* Base styling */
+* {
+    transition:
+        background 0.35s ease,
+        color 0.35s ease,
+        opacity 0.4s ease;
+    border: none;
+    border-radius: 2px;
+    font-family: 'JetBrains Mono';
+    /* dynamically replaced by font switcher */
+    font-size: 13px;
+    font-weight: 600;
+    min-height: 0;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.7);
+    /* subtle sharpness for thin fonts */
+}
+
+/* Fully transparent background (floating effect) */
+window#waybar {
+    background: rgba(17, 17, 27, 0.6);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    color: #cdd6f4;
+}
+
+window#waybar.hidden {
+    opacity: 0.1;
+}
+
+/* Workspaces (clean floating blocks) */
+#workspaces {
+    background: rgba(0, 0, 0, 0.5);
+    margin: 0.05em 0.1em;
+    /* reduced height spacing */
+    padding: 0 0.1em;
+    border-radius: 3px;
+}
+
+#workspaces button {
+    padding: 0.2em 0.45em;
+    /* slightly tighter than before */
+    margin: 0.5em 0.25em;
+    font-weight: 600;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #a6adc8;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+#workspaces button:hover {
+    color: #89b4fa;
+    background: rgba(137, 180, 250, 0.2);
+}
+
+#workspaces button.active {
+    background: rgba(137, 180, 250, 0.45);
+    color: #ffffff;
+}
+
+#workspaces button.urgent {
+    background: rgba(243, 139, 168, 0.35);
+    color: #f38ba8;
+}
+
+/* Modules — floating, borderless, matching workspaces style */
+#tray,
+#battery,
+#network,
+#pulseaudio,
+#pulseaudio.microphone,
+#bluetooth,
+#custom-server,
+#custom-launcher,
+#custom-clock {
+    padding: 0.2em 0.55em;
+    /* match workspaces padding */
+    min-height: 2em;
+    /* reduced height */
+    border-radius: 3px;
+    /* match workspaces */
+    background: rgba(0, 0, 0, 0.5);
+    /* same as workspaces button background */
+    color: #a6adc8;
+    /* default color like workspaces */
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* === Crisp Icons === */
+#tray i,
+#battery i,
+#network i,
+#pulseaudio i,
+#bluetooth i,
+#custom-server i,
+#custom-launcher i,
+#custom-clock i {
+    font-size: 14px;
+    /* slightly bigger than text */
+    margin-right: 0.2em;
+    /* space between icon and text */
+}
+
+/* Module colors */
+#battery {
+    color: #a6e3a1;
+}
+
+#battery.warning {
+    color: #f9e2af;
+}
+
+#battery.critical {
+    color: #f38ba8;
+}
+
+#network {
+    color: #89b4fa;
+}
+
+#network.disconnected {
+    color: #f38ba8;
+}
+
+#pulseaudio {
+    color: #89dceb;
+}
+
+#pulseaudio.muted {
+    color: #7f849c;
+}
+
+#pulseaudio.microphone {
+    color: #cba6f7;
+}
+
+#bluetooth {
+    color: #89b4fa;
+}
+
+#custom-server {
+    color: #74c7ec;
+}
+
+#custom-launcher {
+    color: #89b4fa;
+}
+
+#custom-clock {
+    color: #cdd6f4;
+    font-weight: 600;
+}
+
+/* Tooltip (clean, dark) */
+tooltip {
+    background: rgba(0, 0, 0, 0.9);
+    color: #cdd6f4;
+    border-radius: 2px;
+    opacity: 0.95;
+}
+
+/* Critical blink */
+@keyframes critical-blink {
+    0% {}
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+#battery.critical:not(.charging) {
+    animation: critical-blink 1s infinite;
+}
+
+
+/* ----------------------------
+   Catppuccin Macchiato Palette
+   base:      #1e1e2e
+   mantle:    #181825
+   crust:     #11111b
+   text:      #cdd6f4
+   subtext1:  #bac2de
+   subtext0:  #a6adc8
+   surface2:  #585b70
+   surface1:  #45475a
+   surface0:  #313244
+   overlay2:  #9399b2
+   overlay1:  #7f849c
+   overlay0:  #6c7086
+   blue:      #89b4fa
+   lavender:  #b4befe
+   sapphire:  #74c7ec
+   sky:       #89dceb
+   teal:      #94e2d5
+   green:     #a6e3a1
+   yellow:    #f9e2af
+   peach:     #fab387
+   maroon:    #eba0ac
+   red:       #f38ba8
+   mauve:     #cba6f7
+   pink:      #f5c2e7
+   flamingo:  #f2cdcd
+   rosewater: #f5e0dc
+   ---------------------------- */

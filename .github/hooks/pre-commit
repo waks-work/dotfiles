@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "🔍 Running pre-commit checks..."
+[ -f "Cargo.toml" ] && cargo fmt
+[ -f "package.json" ] && npx prettier --write . || true
+echo "✅ Pre-commit checks passed!"

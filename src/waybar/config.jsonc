@@ -1,0 +1,159 @@
+{
+  "$schema": "https://schemas.waybar.dev/0.9.5/config.schema.json",
+  "layer": "top",
+  "position": "top",
+  "mod": "dock",
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "height": 18,
+  "spacing": 4,
+  "margin-top": 2,
+  "margin-bottom": 0.5,
+  "margin-left": 2,
+  "margin-right": 2,
+  "modules-left": [
+    "custom/launcher",
+    "hyprland/workspaces",
+    "custom/server"
+  ],
+  "modules-center": [
+    "custom/clock",
+    "pulseaudio#microphone"
+  ],
+  "modules-right": [
+    "tray",
+    "network",
+    "bluetooth",
+    "pulseaudio",
+    "battery"
+  ],
+  "css": "~/.config/waybar/style.css",
+  "custom/server": {
+    "format": "󰓇",
+    "tooltip": true,
+    "tooltip-format": "Server Status: Active",
+    "on-click": "alacritty -e ssh user@yourserver"
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "on-click": "activate",
+    "active-only": true,
+    "all-outputs": true,
+    "disable-scroll-wraparound": false,
+    "persistent-workspaces": {
+      "*": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "",
+      "7": "",
+      "8": "",
+      "9": "",
+      "10": "",
+      "urgent": "",
+      "default": ""
+    }
+  },
+  "custom/launcher": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "rofi -show drun -theme ~/.config/rofi/tokyo-night.rasi",
+    "on-click-right": "killall rofi || wlogout"
+  },
+  "tray": {
+    "icon-size": 15,
+    "spacing": 6
+  },
+  "custom/clock": {
+    "exec": "date '+%d - %H:%M'", // text shown on bar
+    "interval": 30,
+    "tooltip": true,
+    "tooltip-format": "{tooltip}", // allow custom tooltip
+    "exec-tooltip": "~/.local/scripts/waybar/date-tooltip.sh", // hover script
+    "on-click": "gnome-calendar"
+  },
+  "battery": {
+    "interval": 15,
+    "states": {
+      "good": 85,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{time} {icon}",
+    "format-icons": {
+      "charging": [
+        "󰢟",
+        "󰂆",
+        "󰂈",
+        "󰂉",
+        "󰂊"
+      ],
+      "default": [
+        "󰂎",
+        "󰂀",
+        "󰂁",
+        "󰂀",
+        "󰁹"
+      ]
+    }
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": " off",
+    "format-icons": {
+      "headphone": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "pamixer -t",
+    "on-click-right": "pavucontrol",
+    "on-scroll-up": "pamixer -i 5",
+    "on-scroll-down": "pamixer -d 5",
+    "scroll-step": 5
+  },
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": " Muted",
+    "on-click": "pamixer --default-source -t",
+    "on-scroll-up": "pamixer --default-source -i 5",
+    "on-scroll-down": "pamixer --default-source -d 5",
+    "scroll-step": 5
+  },
+  "network": {
+    "interval": 5,
+    "format-wifi": "  {signalStrength}%",
+    "format-ethernet": " Connected",
+    "format-disconnected": " Disconnected",
+    "tooltip-format": "{essid} - {ipaddr}/{cidr}",
+    "on-click": "nm-connection-editor"
+  },
+  "bluetooth": {
+    "interval": 5,
+    "format": " {status}",
+    "format-disabled": " off",
+    "format-connected": " {num_connections}",
+    "tooltip-format": "{device_alias}",
+    "tooltip-format-connected": " {device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "on-click": "blueman-manager"
+  }
+}
